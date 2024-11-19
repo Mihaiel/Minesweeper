@@ -44,7 +44,7 @@ public class Main extends Application {
 
         // Setup the board
         Board board = new Board();
-        board.setDifficulty("Easy");
+        board.setDifficulty("Hard");
         board.getInfo();
 
         // Generate the board and add it to the root StackPane

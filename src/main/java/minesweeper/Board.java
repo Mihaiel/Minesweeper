@@ -2,12 +2,18 @@ package minesweeper;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import org.controlsfx.control.spreadsheet.Grid;
 
 public class Board{
     private short COLS, ROWS, BOMBS;
     private short FLAGS, SCORE = 0;
     private String DIFFICULTY;
     private int[][] gameBoard = new int[ROWS][COLS];
+    private boolean[][] flag;
     private final GridPane gridPane;
 
     public Board()
@@ -69,7 +75,8 @@ public class Board{
                 throw new IllegalArgumentException("Difficulty must be either 0, 1, 2 or 3");
         }
 
-        this.gameBoard = new int[ROWS][COLS];
+        this.flag = new boolean[this.ROWS][this.COLS];
+        this.gameBoard = new int[this.ROWS][this.COLS];
     }
 
     public void generateGrid()
@@ -120,21 +127,52 @@ public class Board{
                     this.gameBoard[row][col] = 1;
                 }
 
-                int finalRow = row;
-                int finalCol = col;
-
-                // Add an event handler for cell interaction
-                cell.setOnAction(event -> {
-                    System.out.println("Clicked cell at: " + finalRow + " " + finalCol);
-                });
-
+                cell.setOnMouseClicked(event -> handleCellClick(event, cell));
                 this.gridPane.add(cell, col, row); // Add button to GridPane
             }
         }
-
     }
 
-    public GridPane getGridPane() {
+    private void handleCellClick(MouseEvent event, Button cell)
+    {
+        int cell_row = GridPane.getRowIndex(cell);
+        int cell_column = GridPane.getColumnIndex(cell);
+
+        // Right Click
+        if (event.getButton() == MouseButton.SECONDARY)
+        {
+            if(!flag[cell_row][cell_column])
+            {
+                flag[cell_row][cell_column] = true;
+                ImageView icon = new ImageView(getClass().getResource("/art/flag.png").toExternalForm());
+                cell.setGraphic(icon);
+                System.out.println("Flag placed!");
+            }
+            else
+            {
+                flag[cell_row][cell_column] = false;
+                cell.setGraphic(null);
+                System.out.println("Flag enplaced!");
+            }
+
+        }
+
+        // Left click
+        else if (event.getButton() == MouseButton.PRIMARY)
+        {
+            if(flag[cell_row][cell_column])
+            {
+                System.out.println("Cannot open cell, there's a flag.");
+            }
+            else
+            {
+                System.out.println("Cell Opened");
+            }
+        }
+    }
+
+    public GridPane getGridPane()
+    {
         return this.gridPane;
     }
 

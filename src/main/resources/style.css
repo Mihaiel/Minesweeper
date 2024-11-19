@@ -1,0 +1,31 @@
+/* Center the GridPane in the parent */
+.grid-pane {
+    -fx-padding: 1;
+    -fx-alignment: center;
+    -fx-pref-width: 80%;
+    -fx-pref-height: 80%;
+    -fx-max-width: 80%;
+    -fx-max-height: 80%;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-end-margin: 10;
+}
+
+/* Ensure buttons fill their cells */
+.cell-button {
+    -fx-background-color: white; /* Optional button background */
+    -fx-border-color: black;     /* Optional button border */
+    -fx-border-width: 0.2;         /* Optional border width */
+    -fx-background-radius: 0;    /* No rounded corners */
+    -fx-min-width: 32px;        /* Fill the width of the cell */
+    -fx-min-height: 32px;       /* Fill the height of the cell */
+}
+
+.bomb {
+    -fx-background-color: black; /* Optional button background */
+    -fx-border-color: black;     /* Optional button border */
+    -fx-border-width: 0.2;         /* Optional border width */
+    -fx-background-radius: 0;    /* No rounded corners */
+    -fx-min-width: 32px;        /* Fill the width of the cell */
+    -fx-min-height: 32px;       /* Fill the height of the cell */
+}

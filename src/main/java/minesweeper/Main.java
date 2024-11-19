@@ -1,5 +1,7 @@
 package minesweeper;
 
+import minesweeper.custom.*;
+
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.stage.Stage;
@@ -19,6 +21,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception
     {
+
         Group root = new Group();
         Scene scene = new Scene(root, Color.LIGHTSKYBLUE);
 
@@ -27,5 +30,9 @@ public class Main extends Application {
         stage.setTitle("Minesweeper - FH Campus Wien");
         stage.setScene(scene);
         stage.show();
+
+        Board board = new Board();
+        board.setDifficulty("Hard");
+        board.getInfo();
     }
 }

@@ -90,6 +90,7 @@ public class Board{
         for(int i = 0; i < this.BOMBS; i++)
         {
             // Generate a random number between 0 and 32 - Math.random generates random numbers between 0.0 and 1.0
+            // 8 Spalten, 8 Reihen
             int random_row = (int) (Math.random() * this.ROWS);
             int random_col = (int) (Math.random() * this.COLS);
 

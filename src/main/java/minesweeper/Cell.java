@@ -1,12 +1,12 @@
 package minesweeper;
 
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-
 import java.awt.*;
+import java.util.Objects;
 
 public class Cell extends Button
 {
-
     private boolean isBomb;
     private boolean isFlag;
     private boolean isRevealed;
@@ -15,7 +15,13 @@ public class Cell extends Button
     {
         this.isFlag = isFlag;
         this.isRevealed = isRevealed;
-        this.isBomb=isBomb;
+        this.isBomb = isBomb;
+
+        this.getStyleClass().add("cell-button");
+
+        if(isBomb)
+            this.getStyleClass().add("bomb");
+
     }
 
     public boolean isBomb()
@@ -33,19 +39,33 @@ public class Cell extends Button
         return this.isRevealed;
     }
 
-    public void setFlagged(boolean flagged, Button cell)
+    public void setFlagged(boolean flagged)
     {
         this.isFlag = flagged;
 
-        if(flagged == true)
+        if(flagged)
         {
-            ImageView icon = new ImageView(getClass().getResource("/art/flag.png").toExternalForm());
+            ImageView icon = new ImageView(Objects.requireNonNull(getClass().getResource("/art/flag.png")).toExternalForm());
             this.setGraphic(icon);
         }
 
-        if(flagged == false)
+        else
         {
-            cell.setGraphic(null);
+            this.setGraphic(null);
+        }
+    }
+
+    public void reveal()
+    {
+        this.isRevealed = true;
+
+        if(isBomb)
+        {
+            ImageView icon = new ImageView(Objects.requireNonNull(getClass().getResource("/art/flag.png")).toExternalForm());
+        }
+        else
+        {
+            ImageView icon = new ImageView(Objects.requireNonNull(getClass().getResource("/art/flag.png")).toExternalForm());
         }
     }
 }

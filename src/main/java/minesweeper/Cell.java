@@ -61,11 +61,19 @@ public class Cell extends Button
 
         if(isBomb)
         {
-            ImageView icon = new ImageView(Objects.requireNonNull(getClass().getResource("/art/flag.png")).toExternalForm());
+            ImageView Bomb = new ImageView(Objects.requireNonNull(getClass().getResource("/art/MineV2.png")).toExternalForm());
+            Bomb.setFitWidth(30);
+            Bomb.setFitHeight(30);
+            Bomb.setPreserveRatio(true);
+            this.setGraphic(Bomb);
         }
         else
         {
-            ImageView icon = new ImageView(Objects.requireNonNull(getClass().getResource("/art/flag.png")).toExternalForm());
+            ImageView Grass = new ImageView(Objects.requireNonNull(getClass().getResource("/art/Grass.png")).toExternalForm());
+            Grass.setFitWidth(30);
+            Grass.setFitHeight(30);
+            Grass.setPreserveRatio(true);
+            this.setGraphic(Grass);
         }
     }
 }

@@ -168,6 +168,7 @@ public class Board{
             else
             {
                 System.out.println("Cell Opened");
+
             }
         }
     }

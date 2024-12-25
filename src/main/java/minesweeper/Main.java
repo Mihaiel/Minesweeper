@@ -1,59 +1,61 @@
 package minesweeper;
 
-import minesweeper.custom.*;
-
 import javafx.application.Application;
 import javafx.scene.Group;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
-import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-
-import java.awt.*;
+import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    public static void main(String[] args)
-    {
-        launch(args);
-    }
+    private Stage stage;
+    private StackPane root;
 
     @Override
-    public void start(Stage stage) throws Exception {
-        // Create a StackPane to center the gridPane
-        StackPane root = new StackPane();
-        Scene scene = new Scene(root);
+    public void start(Stage primaryStage) {
+        this.stage = primaryStage;
+        root = new StackPane();
+        root.setStyle("-fx-background-color: lightblue;");
+        // Übergabe von "this" an SwitchScenes
+        UserInterface ui = new UserInterface();
+        SwitchScenes switchScenes = new SwitchScenes(root, ui, this);
 
-        // Create the stage
-        stage.setTitle("Minesweeper - FH Campus Wien");
-        stage.setScene(scene);
-        stage.setWidth(1280);
-        stage.setHeight(720);
-        stage.resizableProperty().setValue(Boolean.FALSE);
+        // MainMenu-Setup
+        switchScenes.setupMainMenu();
 
-        // Load CSS for styling
+        // Setze Szene und zeige das Fenster
+        Scene scene = new Scene(root, 1280, 720);
+        primaryStage.setResizable(false);
         String css = getClass().getResource("/style.css").toExternalForm();
-        scene.getStylesheets().add(css);
+        scene.getStylesheets().add(css); // CSS einbinden
+        primaryStage.setScene(scene);
 
-        // App icon
+        // App-Icon setzen
         Image icon = new Image(getClass().getResource("/art/icon.png").toExternalForm());
-        stage.getIcons().add(icon);
+        primaryStage.getIcons().add(icon);
 
-        // Setup the board
-        Board board = new Board();
-        board.setDifficulty("Easy");
-        board.getInfo();
-
-        // Generate the board and add it to the root StackPane
-        GridPane gridPane = board.getGridPane();
-        board.generateGrid();
-        root.getChildren().add(gridPane);
-
-        // Show the stage
-        stage.show();
+        primaryStage.setTitle("Minesweeper");
+        primaryStage.show();
     }
 
+    // Methode zum Erstellen des Spielfelds und Hinzufügen zur Scene
+    public void createBoard(String difficulty) {
+        System.out.println("Creating board with difficulty: " + difficulty);
+
+        // Spielfeld erstellen
+        Board board = new Board();
+        board.setDifficulty(difficulty); // Schwierigkeit setzen
+        board.generateGrid(); // Spielfeld mit Zellen generieren
+
+        // Holen der GridPane vom Board und Hinzufügen zur StackPane
+        GridPane gridPane = board.getGridPane();
+        root.getChildren().clear(); // Entferne vorherige Layouts
+        root.getChildren().add(gridPane); // Neues Spielfeld hinzufügen
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }

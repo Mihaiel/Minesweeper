@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.controlsfx.control.spreadsheet.Grid;
 
+import java.util.Objects;
+
 public class Board{
     private short COLS, ROWS, BOMBS;
     private short FLAGS, SCORE = 0;
@@ -47,7 +49,7 @@ public class Board{
                 this.BOMBS = 40;
                 break;
 
-            case "Hard":
+            case "Difficult":
                 this.ROWS = 16;
                 this.COLS = 32;
                 this.BOMBS = 99;
@@ -134,44 +136,83 @@ public class Board{
         }
     }
 
-    private void handleCellClick(MouseEvent event, Button cell)
-    {
+    private void handleCellClick(MouseEvent event, Button cell) {
         int cell_row = GridPane.getRowIndex(cell);
         int cell_column = GridPane.getColumnIndex(cell);
 
-        // Right Click
-        if (event.getButton() == MouseButton.SECONDARY)
-        {
-            if(!flag[cell_row][cell_column])
-            {
-                flag[cell_row][cell_column] = true;
-                ImageView icon = new ImageView(getClass().getResource("/art/flag.png").toExternalForm());
-                cell.setGraphic(icon);
-                System.out.println("Flag placed!");
-            }
-            else
-            {
-                flag[cell_row][cell_column] = false;
-                cell.setGraphic(null);
-                System.out.println("Flag enplaced!");
-            }
-
+        // Überprüfen, ob das angeklickte Feld eine Bombe ist
+        if (gameBoard[cell_row][cell_column] == 1) { // 1 bedeutet Bombe
+            revealBomb(cell);
+        } else {
+            revealSafeCell(cell, cell_row, cell_column);
         }
 
-        // Left click
-        else if (event.getButton() == MouseButton.PRIMARY)
-        {
-            if(flag[cell_row][cell_column])
-            {
-                System.out.println("Cannot open cell, there's a flag.");
-            }
-            else
-            {
-                System.out.println("Cell Opened");
-
-            }
+        // Rechte Maustaste - Flag setzen oder entfernen
+        if (event.getButton() == MouseButton.SECONDARY) {
+            toggleFlag(cell, cell_row, cell_column);
         }
     }
+
+    private void revealBomb(Button cell) {
+        ImageView bombImage = new ImageView(Objects.requireNonNull(getClass().getResource("/art/MineV2.png")).toExternalForm());
+        bombImage.setFitWidth(30);
+        bombImage.setFitHeight(30);
+        bombImage.setPreserveRatio(true);
+        cell.setGraphic(bombImage);  // Setze das Bild einer Bombe
+
+        System.out.println("BOOM! Bomb revealed.");
+    }
+
+    private void revealSafeCell(Button cell, int row, int col) {
+        // Berechnen der benachbarten Bomben
+        int adjacentBombs = countAdjacentBombs(row, col);
+
+        // Wenn es benachbarte Bomben gibt, zeige die Zahl an, ansonsten einfach Gras
+        if (adjacentBombs > 0) {
+            cell.setText(String.valueOf(adjacentBombs));
+        } else {
+            ImageView grassImage = new ImageView(Objects.requireNonNull(getClass().getResource("/art/Grass.png")).toExternalForm());
+            grassImage.setFitWidth(30);
+            grassImage.setFitHeight(30);
+            grassImage.setPreserveRatio(true);
+            cell.setGraphic(grassImage);
+        }
+
+        System.out.println("Safe cell revealed.");
+    }
+
+    private int countAdjacentBombs(int row, int col) {
+        int bombCount = 0;
+
+        // Überprüfen der angrenzenden Zellen (links, rechts, oben, unten und diagonal)
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                int neighborRow = row + i;
+                int neighborCol = col + j;
+
+                if (neighborRow >= 0 && neighborRow < ROWS && neighborCol >= 0 && neighborCol < COLS) {
+                    if (gameBoard[neighborRow][neighborCol] == 1) {
+                        bombCount++;
+                    }
+                }
+            }
+        }
+        return bombCount;
+    }
+
+    private void toggleFlag(Button cell, int row, int col) {
+        if (!flag[row][col]) {
+            flag[row][col] = true;
+            ImageView flagIcon = new ImageView(getClass().getResource("/art/flag.png").toExternalForm());
+            cell.setGraphic(flagIcon);
+            System.out.println("Flag placed!");
+        } else {
+            flag[row][col] = false;
+            cell.setGraphic(null);
+            System.out.println("Flag removed!");
+        }
+    }
+
 
     public GridPane getGridPane()
     {

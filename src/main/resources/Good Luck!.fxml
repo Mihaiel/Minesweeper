@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0"
+            prefWidth="640.0" style="-fx-background-color: d3d3d3;" xmlns="http://javafx.com/javafx/23.0.1"
+>
+   <Text layoutX="133.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Good Luck!" textAlignment="CENTER"
+         wrappingWidth="384.421875" AnchorPane.leftAnchor="133.0" AnchorPane.rightAnchor="123.0"
+         AnchorPane.topAnchor="20.0">
+      <font>
+         <Font name="Lucida Console" size="56.0"/>
+      </font>
+   </Text>
+   <Text layoutX="110.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0"
+         text="&lt; may your moves be minefree!&gt;" textAlignment="CENTER" wrappingWidth="419.13671875"
+         AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="110.86328125" AnchorPane.topAnchor="87.0224609375">
+      <font>
+         <Font name="Lucida Console" size="22.0"/>
+      </font>
+   </Text>
+   <Text layoutX="33.0" layoutY="194.203125" strokeType="OUTSIDE" strokeWidth="0.0"
+         text="Hint: Spot the sneaky fields and flag them like a pro!" wrappingWidth="602.13671875"
+         AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="180.0">
+      <font>
+         <Font name="Lucida Console" size="14.0"/>
+      </font>
+   </Text>
+   <ImageView fitHeight="41.0" fitWidth="49.0" layoutX="493.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../../src/main/resources/art/bearhappy.png"/>
+   </ImageView>
+   <Text layoutX="413.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Are you ready?"
+         textAlignment="CENTER" wrappingWidth="130.0498046875">
+      <font>
+         <Font name="Lucida Console" size="14.0"/>
+      </font>
+   </Text>
+</AnchorPane>

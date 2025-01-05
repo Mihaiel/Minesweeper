@@ -12,4 +12,6 @@ module minesweeper {
 
     opens minesweeper to javafx.fxml;
     exports minesweeper;
+    exports minesweeper.UI;
+    opens minesweeper.UI to javafx.fxml;
 }

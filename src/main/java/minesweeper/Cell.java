@@ -2,7 +2,9 @@ package minesweeper;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import java.awt.*;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+
 import java.util.Objects;
 
 public class Cell extends Button
@@ -10,18 +12,19 @@ public class Cell extends Button
     private boolean isBomb;
     private boolean isFlag;
     private boolean isRevealed;
+    private int neighborBombs;
 
     public Cell(boolean isBomb, boolean isFlag, boolean isRevealed)
     {
         this.isFlag = isFlag;
         this.isRevealed = isRevealed;
         this.isBomb = isBomb;
+        setOnMouseClicked(this::handleClick);
 
         this.getStyleClass().add("cell-button");
 
         if(isBomb)
             this.getStyleClass().add("bomb");
-
     }
 
     public boolean isBomb()
@@ -39,19 +42,27 @@ public class Cell extends Button
         return this.isRevealed;
     }
 
-    public void setFlagged(boolean flagged)
-    {
-        this.isFlag = flagged;
+    public int getNeighborBombs() {
+        return this.neighborBombs;
+    }
 
-        if(flagged)
+    public void setNeighborBombs(int neighborBombs) {
+        this.neighborBombs = neighborBombs;
+    }
+
+    public void toggleFlag(){
+        this.isFlag = !this.isFlag;
+
+        if(this.isFlag)
         {
             ImageView icon = new ImageView(Objects.requireNonNull(getClass().getResource("/art/flag.png")).toExternalForm());
             this.setGraphic(icon);
+            System.out.println("Cell toggleFlag() - Flag placed.");
         }
-
         else
         {
             this.setGraphic(null);
+            System.out.println("Cell toggleFlag() - Flag removed.");
         }
     }
 
@@ -66,14 +77,44 @@ public class Cell extends Button
             Bomb.setFitHeight(30);
             Bomb.setPreserveRatio(true);
             this.setGraphic(Bomb);
+            System.out.println("Cell reveal() - Bomb revealed.");
         }
         else
         {
-            ImageView Grass = new ImageView(Objects.requireNonNull(getClass().getResource("/art/Grass.png")).toExternalForm());
-            Grass.setFitWidth(30);
-            Grass.setFitHeight(30);
-            Grass.setPreserveRatio(true);
-            this.setGraphic(Grass);
+            this.getStyleClass().add("revealed");
+            int neighborBombs = getNeighborBombs();
+
+            if (neighborBombs > 0)
+            {
+                setText(String.valueOf(neighborBombs));
+            }
+            else
+            {
+                setText("");
+            }
+            System.out.println("Cell reveal() -  " + neighborBombs + " neighbor bombs.");
+        }
+    }
+
+    // Mouse events for each cell
+    public void handleClick(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY)
+        {
+            if (!isRevealed && !isFlag) {
+                reveal();
+                System.out.println("Cell handleClick() - Cell revealed.");
+            }
+        }
+        else if (event.getButton() == MouseButton.SECONDARY)
+        {
+            if(isFlag) {
+                toggleFlag();
+            }
+
+            else if(!isFlag && !isRevealed)
+            {
+                toggleFlag();
+            }
         }
     }
 }

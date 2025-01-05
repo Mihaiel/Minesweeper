@@ -1,4 +1,4 @@
-package minesweeper;
+package minesweeper.UI;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

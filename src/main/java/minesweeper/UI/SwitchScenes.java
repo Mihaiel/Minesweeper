@@ -1,6 +1,7 @@
-package minesweeper;
+package minesweeper.UI;
 
 import javafx.scene.layout.StackPane;
+import minesweeper.Main;
 
 public class SwitchScenes
 {

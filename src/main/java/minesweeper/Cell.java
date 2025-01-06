@@ -19,7 +19,6 @@ public class Cell extends Button
         this.isFlag = isFlag;
         this.isRevealed = isRevealed;
         this.isBomb = isBomb;
-        setOnMouseClicked(this::handleClick);
 
         this.getStyleClass().add("cell-button");
 
@@ -93,28 +92,6 @@ public class Cell extends Button
                 setText("");
             }
             System.out.println("Cell reveal() -  " + neighborBombs + " neighbor bombs.");
-        }
-    }
-
-    // Mouse events for each cell
-    public void handleClick(MouseEvent event) {
-        if (event.getButton() == MouseButton.PRIMARY)
-        {
-            if (!isRevealed && !isFlag) {
-                reveal();
-                System.out.println("Cell handleClick() - Cell revealed.");
-            }
-        }
-        else if (event.getButton() == MouseButton.SECONDARY)
-        {
-            if(isFlag) {
-                toggleFlag();
-            }
-
-            else if(!isFlag && !isRevealed)
-            {
-                toggleFlag();
-            }
         }
     }
 }

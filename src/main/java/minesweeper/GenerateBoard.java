@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class GenerateBoard {
 
-    public static Cell [][] generateBoard(int rows, int cols, int bombCount ) {
+    public static Cell [][] generateBoard(int rows, int cols, int bombCount) {
 
         // Total cell count
         int totalCells = rows * cols;
@@ -20,7 +20,7 @@ public class GenerateBoard {
         // Initialize the board as empty cells
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
-                board [x][y] = new Cell(false, false,false);
+                board [y][x] = new Cell(false, false,false);
             }
         }
 

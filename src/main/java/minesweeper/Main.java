@@ -31,7 +31,7 @@ public class Main extends Application {
         Scene scene = new Scene(root, 1280, 720);
         primaryStage.setResizable(false);
         String css = getClass().getResource("/style.css").toExternalForm();
-        scene.getStylesheets().add(css); // CSS einbinden
+        scene.getStylesheets().add(css);
         primaryStage.setScene(scene);
 
         // Comments in english

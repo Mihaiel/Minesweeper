@@ -30,11 +30,43 @@
     -fx-min-height: 32px;       /* Fill the height of the cell */
 }
 
+
+/* Revealed Styles*/
 .revealed {
     -fx-background-color: #AFAFAF; /* Optional button background */
-    -fx-border-color: black;     /* Optional button border */
-    -fx-border-width: 0.2;         /* Optional border width */
-    -fx-background-radius: 0;    /* No rounded corners */
-    -fx-min-width: 32px;        /* Fill the width of the cell */
-    -fx-min-height: 32px;       /* Fill the height of the cell */
+    -fx-font-size: 28px;
+    -fx-border-color: black; /* Optional button border */
+    -fx-border-width: 0.2; /* Optional border width */
+    -fx-background-radius: 0; /* No rounded corners */
+    -fx-min-width: 32px; /* Fill the width of the cell */
+    -fx-min-height: 32px; /* Fill the height of the cell */
+
+    -fx-padding: 0; /* Reduce padding */
+    -fx-alignment: center; /* Ensure text stays centered */
+    -fx-graphic: null; /* Remove graphic interference */
 }
+
+.revealed-1 {
+    -fx-text-fill: blue; /* Optional button background */
+}
+
+.revealed-2 {
+    -fx-text-fill: green; /* Optional button background */
+}
+
+.revealed-3 {
+    -fx-text-fill: yellow; /* Optional button background */
+}
+
+.revealed-4 {
+    -fx-text-fill: orange; /* Optional button background */
+}
+
+.revealed-5-6 {
+    -fx-text-fill: red; /* Optional button background */
+}
+
+.revealed-7-8 {
+    -fx-text-fill: purple; /* Optional button background */
+}
+

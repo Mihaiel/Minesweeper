@@ -9,6 +9,7 @@ module minesweeper {
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
     requires java.desktop;
+    requires javafx.media;
 
     opens minesweeper to javafx.fxml;
     exports minesweeper;

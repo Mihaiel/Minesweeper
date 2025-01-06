@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import minesweeper.Sounds.SoundManager;
 
 import java.util.Objects;
 
@@ -26,6 +27,8 @@ public class Cell extends Button
             this.getStyleClass().add("bomb");
     }
 
+
+    // Getters
     public boolean isBomb()
     {
         return this.isBomb;
@@ -41,6 +44,7 @@ public class Cell extends Button
         return this.isRevealed;
     }
 
+    // Setter
     public int getNeighborBombs() {
         return this.neighborBombs;
     }
@@ -49,6 +53,7 @@ public class Cell extends Button
         this.neighborBombs = neighborBombs;
     }
 
+    // Toggle Flag
     public void toggleFlag(){
         this.isFlag = !this.isFlag;
 
@@ -65,6 +70,7 @@ public class Cell extends Button
         }
     }
 
+    // Reveal Function
     public void reveal()
     {
         this.isRevealed = true;
@@ -77,21 +83,61 @@ public class Cell extends Button
             Bomb.setPreserveRatio(true);
             this.setGraphic(Bomb);
             System.out.println("Cell reveal() - Bomb revealed.");
+            SoundManager.playMineOpen();
         }
         else
         {
-            this.getStyleClass().add("revealed");
             int neighborBombs = getNeighborBombs();
+            setStyle(neighborBombs);
 
             if (neighborBombs > 0)
             {
                 setText(String.valueOf(neighborBombs));
+                SoundManager.playCellOpen();
             }
             else
             {
                 setText("");
+                SoundManager.playWideOpen();
             }
             System.out.println("Cell reveal() -  " + neighborBombs + " neighbor bombs.");
+        }
+    }
+
+    public void setStyle(int number)
+    {
+        this.getStyleClass().add("revealed");
+
+        switch(number) {
+            case 0:
+                break;
+
+            case 1:
+                this.getStyleClass().add("revealed-1");
+                break;
+
+            case 2:
+                this.getStyleClass().add("revealed-2");
+                break;
+
+            case 3:
+                this.getStyleClass().add("revealed-3");
+                break;
+
+            case 4:
+                this.getStyleClass().add("revealed-4");
+                break;
+
+            case 5,6:
+                this.getStyleClass().add("revealed-5-6");
+                break;
+
+            case 7,8:
+                this.getStyleClass().add("revealed-7-8");
+                break;
+
+            default:
+                throw new IllegalArgumentException("Class Cell - Invalid number style. ");
         }
     }
 }

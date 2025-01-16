@@ -3,82 +3,106 @@ package minesweeper.UI;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import java.util.Objects;
+import javafx.geometry.Pos;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.control.CheckBox;
+import javafx.geometry.Insets;
 
 public class UserInterface {
 
-    public StackPane createMainMenu(SwitchScenes switchScenes) {
-        StackPane layout = new StackPane();
+    public VBox createMainMenu(SwitchScenes switchScenes)
+    {
+        // Main VBox for the layout
+        VBox layout = new VBox(20); // Space between sections
+        layout.setPrefSize(1280, 720);
+        layout.setAlignment(Pos.TOP_CENTER); // Center elements at the top
 
-        // Title Label
-        Label title = new Label("Minesweeper");
-        title.setStyle("-fx-font-size: 100px; -fx-text-fill: blue; -fx-font-weight: bold;");
-        title.setTranslateX(0);
-        title.setTranslateY(-290);
+        // Add header
+        VBox header = createHeader("Minesweeper", true);
+        layout.getChildren().add(header);
 
-        // Buttons erstellen
+        // Button area (HBox)
+        HBox mainButtons = new HBox(35); // Space of 20px between buttons
+        mainButtons.setAlignment(Pos.CENTER); // Center buttons horizontally
+
         Button startButton = new Button("Start");
         Button settingsButton = new Button("Settings");
-        Button exitButton = new Button("Exit");
         Button creditsButton = new Button("Credits");
-        Button statisticsButton = new Button("Statistics");
+        Button exitButton = new Button("Exit");
 
-        // Layout für die Buttons
-        VBox mainButtons = new VBox(50);
-        mainButtons.getChildren().add(startButton);
-        mainButtons.setTranslateX(560);
-        mainButtons.setTranslateY(450);
-        mainButtons.setStyle("-fx-font-size: 48px;");
+        // Style buttons
+        String buttonStyle = "-fx-background-color: #4F82A7; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 30px; -fx-padding: 10 20 10 20;";
+        startButton.setStyle(buttonStyle);
+        settingsButton.setStyle(buttonStyle);
+        creditsButton.setStyle(buttonStyle);
+        exitButton.setStyle("-fx-background-color: #B54444; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 30px; -fx-padding: 10 20 10 20;");
 
-        // Untere Buttons Layout
-        HBox bottomButtons = new HBox(175);
-        bottomButtons.getChildren().addAll(settingsButton, creditsButton, statisticsButton, exitButton);
-        bottomButtons.setTranslateY(620);
-        bottomButtons.setTranslateX(100);
-        bottomButtons.setStyle("-fx-font-size: 30px;");
+        // Add buttons to HBox
+        mainButtons.getChildren().addAll(startButton, settingsButton, creditsButton, exitButton);
 
-        layout.getChildren().addAll(title, mainButtons, bottomButtons);
-
-        // Button-Aktionen definieren
+        // Define actions for buttons
         startButton.setOnAction(e -> switchScenes.openGameWindow());
         settingsButton.setOnAction(e -> switchScenes.openSettingsWindow());
         creditsButton.setOnAction(e -> switchScenes.openCreditsWindow());
-        statisticsButton.setOnAction(e -> switchScenes.openStatisticsWindow());
         exitButton.setOnAction(e -> System.exit(0));
+
+        // Add button area to the main VBox
+        layout.getChildren().add(mainButtons);
 
         return layout;
     }
 
-    public VBox createGameWindow(SwitchScenes switchScenes) {
-        VBox layout = new VBox(20);
+    public BorderPane createGameWindow(SwitchScenes switchScenes) {
+        BorderPane layout = new BorderPane();
+        layout.setPrefSize(1280, 720);
 
-        // Label für die Schwierigkeit-Auswahl
-        Label gameLabel = new Label("Choose Difficulty");
-        gameLabel.setStyle("-fx-font-size: 40px;");
+        // Add header
+        VBox header = createHeader("Minesweeper", true);
+        layout.setTop(header);
 
-        // Buttons für die Schwierigkeits-Auswahl
+        // Create a VBox for content
+        VBox centerContent = new VBox(20); // Space of 20px between elements
+        centerContent.setAlignment(Pos.TOP_CENTER); // Centers all elements horizontally, but not vertically
+
+        // Here we add an additional HBox to control spacing between the image and the buttons
+        HBox spacingBox = new HBox();
+        spacingBox.setPrefHeight(0); // Set spacing here (e.g., 100px)
+
+        // First HBox for difficulty buttons
+        HBox gameButtonsTop = new HBox(35); // Space between buttons
+        gameButtonsTop.setAlignment(Pos.CENTER); // Center buttons horizontally
         Button easyButton = new Button("Easy");
         Button mediumButton = new Button("Medium");
         Button difficultButton = new Button("Difficult");
-        Button halfHalfButton = new Button("50/50");
-        Button backButton = new Button("Back to Main");
+        Button halfHalfButton = new Button("50/50 \uD83D\uDCB8");
 
-        // Setzen der Styles für die Buttons
-        easyButton.setStyle("-fx-font-size: 30px;");
-        mediumButton.setStyle("-fx-font-size: 30px;");
-        difficultButton.setStyle("-fx-font-size: 30px;");
-        halfHalfButton.setStyle("-fx-font-size: 30px;");
+        easyButton.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-background-color: #4F82A7; -fx-text-fill: white;");
+        mediumButton.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-background-color: #EBBB38; -fx-text-fill: white;");
+        difficultButton.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-background-color: #B54444; -fx-text-fill: white;");
+        halfHalfButton.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-background-color: #539734; -fx-text-fill: white;");
+
+        // Add buttons to HBox
+        gameButtonsTop.getChildren().addAll(easyButton, mediumButton, difficultButton, halfHalfButton);
+
+        // Second HBox for the "Back" button
+        HBox gameButtonsBottom = new HBox(); // No space required
+        gameButtonsBottom.setAlignment(Pos.CENTER); // Center button horizontally
+        Button backButton = new Button("←Back");
         backButton.setStyle("-fx-font-size: 15px;");
+        backButton.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-background-color: #4F82A7; -fx-text-fill: white;");
+        gameButtonsBottom.getChildren().addAll(backButton);
 
-        // Layout für die Buttons
-        layout.getChildren().addAll(gameLabel, easyButton, mediumButton, difficultButton, halfHalfButton, backButton);
+        // Add all HBoxes to the VBox below the header
+        centerContent.getChildren().addAll(spacingBox, gameButtonsTop, gameButtonsBottom);
 
-        // Aktion für den Zurück-Button
+        layout.setCenter(centerContent);
+
+        // Define actions for buttons
         backButton.setOnAction(e -> switchScenes.setupMainMenu());
-
-        // Aktionen für die Schwierigkeits-Buttons
         easyButton.setOnAction(e -> switchScenes.getMain().createBoard("Easy"));
         mediumButton.setOnAction(e -> switchScenes.getMain().createBoard("Medium"));
         difficultButton.setOnAction(e -> switchScenes.getMain().createBoard("Difficult"));
@@ -88,67 +112,168 @@ public class UserInterface {
     }
 
     public VBox createSettingsWindow(SwitchScenes switchScenes) {
-        VBox layout = new VBox(20);
+        VBox layout = new VBox(20); // Space between elements
 
-        Label settingsLabel = new Label("Settings");
-        settingsLabel.setStyle("-fx-font-size: 50px;");
+        // Header with title "Settings"
+        VBox header = createHeader("Settings", false);
+        layout.getChildren().add(header);
 
-        Label volumeLabel = new Label("Musik Lautstärke:");
+        // HBox for music volume slider
+        HBox volumeBox = new HBox(10); // Space between slider and percentage label
+        volumeBox.setAlignment(Pos.CENTER); // Center HBox
+
+        Label volumeLabel = new Label("Music Volume:");
         volumeLabel.setStyle("-fx-font-size: 40px;");
         Slider volumeSlider = new Slider(0, 100, 50);
+        volumeSlider.setShowTickMarks(true); // Show tick marks
+        volumeSlider.setBlockIncrement(1);
+
+        // Label for slider percentage value
+        Label volumePercent = new Label("50%");
+        volumePercent.setStyle("-fx-font-size: 40px; -fx-text-fill: #4F82A7;");
+
+        // Update percentage value when slider is moved
+        volumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            volumePercent.setText(String.format("%.0f%%", newValue.doubleValue()));
+        });
+
+        // Add elements to HBox
+        volumeBox.getChildren().addAll(volumeLabel, volumeSlider, volumePercent);
+
+        // HBox for master volume slider
+        HBox masterVolumeBox = new HBox(10);
+        masterVolumeBox.setAlignment(Pos.CENTER);
 
         Label masterVolumeLabel = new Label("Master Volume:");
         masterVolumeLabel.setStyle("-fx-font-size: 40px;");
         Slider masterVolumeSlider = new Slider(0, 100, 50);
-
-        Button backButton = new Button("Back to Main");
-        backButton.setStyle("-fx-font-size: 15px;");
-        backButton.setTranslateX(610);  // Positionierung des Buttons
-        backButton.setTranslateY(200);  // Button unter dem Slider
-
-        volumeSlider.setShowTickMarks(true);
         masterVolumeSlider.setShowTickMarks(true);
+        masterVolumeSlider.setBlockIncrement(1);
 
-        layout.getChildren().addAll(settingsLabel, volumeLabel, volumeSlider, masterVolumeLabel, masterVolumeSlider, backButton);
+        // Label for master volume slider percentage value
+        Label masterVolumePercent = new Label("50%");
+        masterVolumePercent.setStyle("-fx-font-size: 40px; -fx-text-fill: #4F82A7;");
 
+        // Update percentage value when master slider is moved
+        masterVolumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            masterVolumePercent.setText(String.format("%.0f%%", newValue.doubleValue()));
+        });
+
+        // Add elements to HBox
+        masterVolumeBox.getChildren().addAll(masterVolumeLabel, masterVolumeSlider, masterVolumePercent);
+
+        // HBox for "Fullscreen" checkbox
+        HBox fullscreenBox = new HBox(10);
+        fullscreenBox.setAlignment(Pos.CENTER); // Center HBox
+
+        // Label for the checkbox
+        Label fullscreenLabel = new Label("Fullscreen");
+        fullscreenLabel.setStyle("-fx-font-size: 40px;");
+
+        // The actual checkbox
+        CheckBox fullscreenCheckBox = new CheckBox();
+        fullscreenCheckBox.setStyle("-fx-font-size: 40px;");
+
+        // Add the checkbox and label to the HBox
+        fullscreenBox.getChildren().addAll(fullscreenLabel, fullscreenCheckBox);
+
+        HBox spacingBox = new HBox();
+        spacingBox.setPrefHeight(300); // Set spacing (e.g., 100px)
+
+        // HBox for "Back" button
+        HBox gameButtonsBottom = new HBox();
+        gameButtonsBottom.setAlignment(Pos.CENTER);
+
+        Button backButton = new Button("←Back");
+        backButton.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-background-color: #4F82A7; -fx-text-fill: white;");
+        gameButtonsBottom.getChildren().addAll(spacingBox, backButton);
+
+        // Actions for the Back button
         backButton.setOnAction(e -> switchScenes.setupMainMenu());
+
+        // Add all elements to layout
+        layout.getChildren().addAll(volumeBox, masterVolumeBox, fullscreenBox, gameButtonsBottom);
 
         return layout;
     }
 
     public VBox createCreditsWindow(SwitchScenes switchScenes) {
-        VBox layout = new VBox(20);
+        VBox layout = new VBox(20); // Space between elements in the VBox
 
-        Label creditsLabel = new Label("Credits");
-        creditsLabel.setStyle("-fx-font-size: 50px;");
+        // Add header and text
+        VBox header = createHeader("Credits", false);
+        layout.getChildren().add(header);
 
-        Button backButton = new Button("Back to Main");
-        backButton.setStyle("-fx-font-size: 15px;");
-        backButton.setTranslateX(610);  // Positionierung des Buttons
-        backButton.setTranslateY(200);  // Button unter dem Slider
+        // HBox for the first header
+        HBox header1 = new HBox();
+        Label title1 = new Label("Developed by Team Binäre Bären");
+        title1.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #000000;");
+        header1.getChildren().add(title1);
+        header1.setPadding(new Insets(0, 0, 0, 40));  // Move the text 100px to the right
 
-        layout.getChildren().addAll(creditsLabel, backButton);
+        // HBox for the second header
+        HBox header2 = new HBox();
+        Label title2 = new Label("Mihaiel Birta, Rami Azab, Sarah Hikal, Orsolya Nemere, Zine");
+        title2.setStyle("-fx-font-size: 25px; -fx-text-fill: #707070;");
+        header2.getChildren().add(title2);
+        header2.setPadding(new Insets(0, 0, 0, 40));  // Move the text 100px to the right
+
+        // HBox for the third header (multi-line)
+        HBox header3 = new HBox();
+        Label title3 = new Label("As our Programming-Teamwork Project 24/25 at the\n" + "University of Applied Sciences FH Campus Wien - CSaDC\n" + "Semester 1");
+        title3.setStyle("-fx-font-size: 25px; -fx-font-style: italic; -fx-text-fill: #000000;");
+        header3.getChildren().add(title3);
+        header3.setPadding(new Insets(0, 0, 0, 40));  // Move the text 100px to the right
+
+        // HBox for the fourth header
+        HBox header4 = new HBox();
+        Label title4 = new Label("GitHub Repository\n" + "Documentation");
+        title4.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #4F82A7;");
+        header4.getChildren().add(title4);
+        header4.setPadding(new Insets(0, 0, 0, 40));  // Move the text 100px to the right
+
+        HBox spacingBox = new HBox();
+        spacingBox.setPrefHeight(50);  // Space of 50px between the text block and button
+
+        HBox gameButtonsBottom = new HBox();  // Space can be omitted
+        gameButtonsBottom.setAlignment(Pos.CENTER);  // Center button horizontally
+        Button backButton = new Button("←Back");
+        backButton.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-background-color: #4F82A7; -fx-text-fill: white;");
+        gameButtonsBottom.getChildren().addAll(backButton);
 
         backButton.setOnAction(e -> switchScenes.setupMainMenu());
+
+        layout.getChildren().addAll(header1, header2, header3, header4, spacingBox, gameButtonsBottom);
 
         return layout;
     }
 
-    public VBox createStatisticsWindow(SwitchScenes switchScenes) {
-        VBox layout = new VBox(20);
+    public VBox createHeader(String titleText, boolean showImage) {
+        // VBox für den Header
+        VBox header = new VBox(5);  // Setze den Abstand hier auf 5 oder 0, um den Abstand zu verkleinern
+        header.setAlignment(Pos.CENTER); // Zentriert alles innerhalb des Headers
 
-        Label statisticsLabel = new Label("Statistics");
-        statisticsLabel.setStyle("-fx-font-size: 50px;");
+        // Titel (der Text wird durch den Parameter titleText ersetzt)
+        Label title = new Label(titleText);
+        title.setStyle("-fx-font-size: 100px; -fx-text-fill: #4F82A7; -fx-font-weight: bold;");
 
-        Button backButton = new Button("Back to Main");
-        backButton.setStyle("-fx-font-size: 15px;");
-        backButton.setTranslateX(610);  // Positionierung des Buttons
-        backButton.setTranslateY(200);  // Button unter dem Slider
+        // Bild (wird nur angezeigt, wenn showImage true ist)
 
-        layout.getChildren().addAll(statisticsLabel, backButton);
+        ImageView tilePic = null;
+        if (showImage)
+        {
+            tilePic = new ImageView(Objects.requireNonNull(getClass().getResource("/art/TitlePicture.png")).toExternalForm());
+            tilePic.setFitWidth(800);
+            tilePic.setPreserveRatio(true);
+        }
 
-        backButton.setOnAction(e -> switchScenes.setupMainMenu());
+        // Elemente hinzufügen
+        header.getChildren().add(title);
+        if (tilePic != null)
+        {
+            header.getChildren().add(tilePic);
+        }
 
-        return layout;
+        return header;
     }
 }

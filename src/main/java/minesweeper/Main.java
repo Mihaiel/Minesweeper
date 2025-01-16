@@ -9,16 +9,17 @@ import javafx.stage.Stage;
 import minesweeper.UI.SwitchScenes;
 import minesweeper.UI.UserInterface;
 
-public class Main extends Application {
-
+public class Main extends Application
+{
     private Stage stage;
     private StackPane root;
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage)
+    {
         this.stage = primaryStage;
         root = new StackPane();
-        root.setStyle("-fx-background-color: lightblue;");
+        root.setStyle("-fx-background-color: #F4F4F4;");
 
         // Comments in english
         UserInterface ui = new UserInterface();
@@ -37,13 +38,13 @@ public class Main extends Application {
         // Comments in english
         Image icon = new Image(getClass().getResource("/art/icon_new.png").toExternalForm());
         primaryStage.getIcons().add(icon);
-
         primaryStage.setTitle("Minesweeper");
         primaryStage.show();
     }
 
     // Comments in english
-    public void createBoard(String difficulty) {
+    public void createBoard(String difficulty)
+    {
         System.out.println("Creating board with difficulty: " + difficulty);
 
         // Comments in english

@@ -13,7 +13,7 @@ public class SwitchScenes
     {
         this.root = root;
         this.ui = ui;
-        this.main = main;  // Main-Objekt initialisieren
+        this.main = main;  // Installing Main-Objekt
     }
 
     public Main getMain() {
@@ -36,12 +36,6 @@ public class SwitchScenes
     {
         root.getChildren().clear();
         root.getChildren().addAll(ui.createCreditsWindow(this));
-    }
-
-    public void openStatisticsWindow()
-    {
-        root.getChildren().clear();
-        root.getChildren().addAll(ui.createStatisticsWindow(this));
     }
 
     public void setupMainMenu()

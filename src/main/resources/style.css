@@ -70,3 +70,12 @@
     -fx-text-fill: purple; /* Optional button background */
 }
 
+.startButton {
+    -fx-pref-height: 10px; /* Höhe auf 30 Pixel setzen */
+}
+
+.exitButton {
+    -fx-background-color: #B54444; /* Ersetze #3498db durch die gewünschte Farbe */
+    -fx-text-fill: black;         /* Textfarbe (weiß in diesem Fall) */
+     /* Optional: Abgerundete Ecken */
+}

@@ -25,6 +25,7 @@ public class Main extends Application
         UserInterface ui = new UserInterface();
         SwitchScenes switchScenes = new SwitchScenes(root, ui, this);
 
+
         // Comments in english
         switchScenes.setupMainMenu();
 

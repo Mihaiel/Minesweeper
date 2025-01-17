@@ -44,7 +44,7 @@ public class Board {
 
             case "50/50":
                 this.rows = 1;
-                this.cols = 1;
+                this.cols = 2;
                 this.bombs = 1;
                 break;
 
@@ -86,14 +86,6 @@ public class Board {
     public GridPane getGridPane() {
         return this.gridPane;
     }
-
-    public void getInfo() {
-        System.out.println("Difficulty: " + this.difficulty);
-        System.out.println("Rows: " + this.rows);
-        System.out.println("Columns: " + this.cols);
-        System.out.println("Bombs: " + this.bombs);
-    }
-
 
     /**
      * Click event handler for every cell

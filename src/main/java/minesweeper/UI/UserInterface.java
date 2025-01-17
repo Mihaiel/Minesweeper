@@ -1,15 +1,17 @@
 package minesweeper.UI;
 
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import java.awt.*;
+import java.net.URI;
 import java.util.Objects;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.control.CheckBox;
 import javafx.geometry.Insets;
 
 public class UserInterface {
@@ -26,7 +28,7 @@ public class UserInterface {
         layout.getChildren().add(header);
 
         // Button area (HBox)
-        HBox mainButtons = new HBox(35); // Space of 20px between buttons
+        HBox mainButtons = new HBox(35); // Space of 35px between buttons
         mainButtons.setAlignment(Pos.CENTER); // Center buttons horizontally
 
         Button startButton = new Button("Start");
@@ -35,11 +37,10 @@ public class UserInterface {
         Button exitButton = new Button("Exit");
 
         // Style buttons
-        String buttonStyle = "-fx-background-color: #4F82A7; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 30px; -fx-padding: 10 20 10 20;";
-        startButton.setStyle(buttonStyle);
-        settingsButton.setStyle(buttonStyle);
-        creditsButton.setStyle(buttonStyle);
-        exitButton.setStyle("-fx-background-color: #B54444; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 30px; -fx-padding: 10 20 10 20;");
+        startButton.getStyleClass().add("ui-button");
+        settingsButton.getStyleClass().add("ui-button");
+        creditsButton.getStyleClass().add("ui-button");
+        exitButton.getStyleClass().addAll("ui-button", "red");
 
         // Add buttons to HBox
         mainButtons.getChildren().addAll(startButton, settingsButton, creditsButton, exitButton);
@@ -80,10 +81,10 @@ public class UserInterface {
         Button difficultButton = new Button("Difficult");
         Button halfHalfButton = new Button("50/50 \uD83D\uDCB8");
 
-        easyButton.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-background-color: #4F82A7; -fx-text-fill: white;");
-        mediumButton.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-background-color: #EBBB38; -fx-text-fill: white;");
-        difficultButton.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-background-color: #B54444; -fx-text-fill: white;");
-        halfHalfButton.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-background-color: #539734; -fx-text-fill: white;");
+        easyButton.getStyleClass().add("ui-button");
+        mediumButton.getStyleClass().addAll("ui-button", "yellow");
+        difficultButton.getStyleClass().addAll("ui-button", "red");
+        halfHalfButton.getStyleClass().addAll("ui-button", "green");
 
         // Add buttons to HBox
         gameButtonsTop.getChildren().addAll(easyButton, mediumButton, difficultButton, halfHalfButton);
@@ -92,8 +93,7 @@ public class UserInterface {
         HBox gameButtonsBottom = new HBox(); // No space required
         gameButtonsBottom.setAlignment(Pos.CENTER); // Center button horizontally
         Button backButton = new Button("←Back");
-        backButton.setStyle("-fx-font-size: 15px;");
-        backButton.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-background-color: #4F82A7; -fx-text-fill: white;");
+        backButton.getStyleClass().add("ui-button");
         gameButtonsBottom.getChildren().addAll(backButton);
 
         // Add all HBoxes to the VBox below the header
@@ -185,7 +185,7 @@ public class UserInterface {
         gameButtonsBottom.setAlignment(Pos.CENTER);
 
         Button backButton = new Button("←Back");
-        backButton.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-background-color: #4F82A7; -fx-text-fill: white;");
+        backButton.getStyleClass().add("ui-button");
         gameButtonsBottom.getChildren().addAll(spacingBox, backButton);
 
         // Actions for the Back button
@@ -207,29 +207,59 @@ public class UserInterface {
         // HBox for the first header
         HBox header1 = new HBox();
         Label title1 = new Label("Developed by Team Binäre Bären");
-        title1.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #000000;");
+        title1.getStyleClass().add("header");
         header1.getChildren().add(title1);
         header1.setPadding(new Insets(0, 0, 0, 40));  // Move the text 100px to the right
 
         // HBox for the second header
         HBox header2 = new HBox();
-        Label title2 = new Label("Mihaiel Birta, Rami Azab, Sarah Hikal, Orsolya Nemere, Zine");
-        title2.setStyle("-fx-font-size: 25px; -fx-text-fill: #707070;");
+        Label title2 = new Label("Mihaiel Birta, Rami Azab, Sarah Hikal, Orsolya Nemere, Zine Ayaz");
+        title2.getStyleClass().add("info");
         header2.getChildren().add(title2);
         header2.setPadding(new Insets(0, 0, 0, 40));  // Move the text 100px to the right
 
         // HBox for the third header (multi-line)
         HBox header3 = new HBox();
-        Label title3 = new Label("As our Programming-Teamwork Project 24/25 at the\n" + "University of Applied Sciences FH Campus Wien - CSaDC\n" + "Semester 1");
-        title3.setStyle("-fx-font-size: 25px; -fx-font-style: italic; -fx-text-fill: #000000;");
+        Label title3 = new Label("as our Programming-Teamwork Project 24/25 at the\n" + "University of Applied Sciences FH Campus Wien - CSaDC\n" + "Semester 1");
+        title3.getStyleClass().add("normal");
         header3.getChildren().add(title3);
         header3.setPadding(new Insets(0, 0, 0, 40));  // Move the text 100px to the right
 
         // HBox for the fourth header
-        HBox header4 = new HBox();
-        Label title4 = new Label("GitHub Repository\n" + "Documentation");
-        title4.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #4F82A7;");
-        header4.getChildren().add(title4);
+        VBox header4 = new VBox();
+
+        // Create a GitHub Hyperlink
+        Hyperlink hyperlink_0 = new Hyperlink("GitHub Repository");
+
+        // Set an action to open the link
+        hyperlink_0.setOnAction(event -> {
+            try {
+                URI uri = new URI("https://github.com/Mihaiel/Minesweeper");
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                    Desktop.getDesktop().browse(uri);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        // Create a Documentation HyperLink
+        Hyperlink hyperlink_1 = new Hyperlink("Documentation");
+
+        // Set an action to open the link
+        hyperlink_1.setOnAction(event -> {
+            try {
+                URI uri = new URI("https://mihaiel.com/");
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                    Desktop.getDesktop().browse(uri);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        hyperlink_0.getStyleClass().add("link");
+        hyperlink_1.getStyleClass().add("link");
+        header4.getChildren().addAll(hyperlink_0, hyperlink_1);
         header4.setPadding(new Insets(0, 0, 0, 40));  // Move the text 100px to the right
 
         HBox spacingBox = new HBox();
@@ -238,7 +268,7 @@ public class UserInterface {
         HBox gameButtonsBottom = new HBox();  // Space can be omitted
         gameButtonsBottom.setAlignment(Pos.CENTER);  // Center button horizontally
         Button backButton = new Button("←Back");
-        backButton.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-background-color: #4F82A7; -fx-text-fill: white;");
+        backButton.getStyleClass().add("ui-button");
         gameButtonsBottom.getChildren().addAll(backButton);
 
         backButton.setOnAction(e -> switchScenes.setupMainMenu());
@@ -255,7 +285,7 @@ public class UserInterface {
 
         // Titel (der Text wird durch den Parameter titleText ersetzt)
         Label title = new Label(titleText);
-        title.setStyle("-fx-font-size: 100px; -fx-text-fill: #4F82A7; -fx-font-weight: bold;");
+        title.getStyleClass().add("title");
 
         // Bild (wird nur angezeigt, wenn showImage true ist)
 

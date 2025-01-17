@@ -44,11 +44,11 @@ public class Cell extends Button
         return this.isRevealed;
     }
 
-    // Setter
     public int getNeighborBombs() {
         return this.neighborBombs;
     }
 
+    // Setter
     public void setNeighborBombs(int neighborBombs) {
         this.neighborBombs = neighborBombs;
     }

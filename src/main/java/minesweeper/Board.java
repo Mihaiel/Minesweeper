@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import minesweeper.UI.SwitchScenes;
 
 public class Board {
     private int rows, cols, bombs;

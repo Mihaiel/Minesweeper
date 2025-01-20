@@ -58,5 +58,4 @@ public class Main extends Application
         root.getChildren().clear();
         root.getChildren().add(gridPane);
     }
-
 }

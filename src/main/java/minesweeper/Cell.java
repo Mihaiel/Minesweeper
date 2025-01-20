@@ -5,6 +5,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import minesweeper.Sounds.SoundManager;
+import minesweeper.UI.SwitchScenes;
 
 import java.util.Objects;
 
@@ -103,6 +104,18 @@ public class Cell extends Button
             System.out.println("Cell reveal() -  " + neighborBombs + " neighbor bombs.");
         }
     }
+
+    public static boolean checkWin(Cell[][] board) {
+        for (Cell[] row : board) {
+            for (Cell cell : row) {
+                if (!cell.isBomb() && !cell.isRevealed()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 
     public void setStyle(int number)
     {

@@ -2,8 +2,6 @@ package minesweeper;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import minesweeper.Sounds.SoundManager;
 import minesweeper.UI.SwitchScenes;
 
@@ -60,7 +58,7 @@ public class Cell extends Button
 
         if(this.isFlag)
         {
-            ImageView icon = new ImageView(Objects.requireNonNull(getClass().getResource("/art/flag.png")).toExternalForm());
+            ImageView icon = new ImageView(Objects.requireNonNull(getClass().getResource("/art/board/flag.png")).toExternalForm());
             this.setGraphic(icon);
             System.out.println("Cell toggleFlag() - Flag placed.");
         }
@@ -78,7 +76,7 @@ public class Cell extends Button
 
         if(isBomb)
         {
-            ImageView Bomb = new ImageView(Objects.requireNonNull(getClass().getResource("/art/MineV2.png")).toExternalForm());
+            ImageView Bomb = new ImageView(Objects.requireNonNull(getClass().getResource("/art/board/mine.png")).toExternalForm());
             Bomb.setFitWidth(30);
             Bomb.setFitHeight(30);
             Bomb.setPreserveRatio(true);

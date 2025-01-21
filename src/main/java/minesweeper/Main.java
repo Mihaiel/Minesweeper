@@ -40,7 +40,7 @@ public class Main extends Application
         primaryStage.setScene(scene);
 
         // Comments in english
-        Image icon = new Image(getClass().getResource("/art/icon_new.png").toExternalForm());
+        Image icon = new Image(getClass().getResource("/art/interface/icon_new.png").toExternalForm());
         primaryStage.getIcons().add(icon);
         primaryStage.setTitle("Minesweeper");
         primaryStage.show();

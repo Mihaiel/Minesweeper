@@ -18,7 +18,6 @@ import java.util.Objects;
  * It acts as a bridge between the root StackPane, the UserInterface,
  * and the Main class, allowing for smooth switching and game flow control.
  */
-
 public class SwitchScenes
 {
     private final StackPane root;

@@ -1,7 +1,6 @@
 package minesweeper.UI;
 
 import minesweeper.Sounds.SoundManager;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,6 +15,13 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
+
+/**
+ * The UserInterface class is responsible for creating and managing
+ * the graphical user interface (GUI) components of the Minesweeper game.
+ * It defines various game windows (e.g., Main Menu, Game Window, Settings, Credits)
+ * and handles their layout, style, and user interactions.
+ */
 
 public class UserInterface {
 

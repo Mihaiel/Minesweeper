@@ -330,4 +330,19 @@ public class UserInterface {
 
         return header;
     }
+
+    /**
+    Method for the end-message, when the player looses or wins. Not implemented
+     **/
+    public static HBox createGameOverText(String message) {
+        HBox labelBox = new HBox();
+        labelBox.setAlignment(Pos.TOP_CENTER);
+        Label text = new Label(message);
+        text.getStyleClass().add("game-over-text");
+        labelBox.getChildren().add(text);
+        return labelBox;
+    }
+
+
+
 }

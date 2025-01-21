@@ -22,24 +22,24 @@ public class Main extends Application
         root = new StackPane();
         root.setStyle("-fx-background-color: #F4F4F4;");
 
-        // Initializes the user interface and SwitchScenes
+        // Comments in english
         UserInterface ui = new UserInterface();
         SwitchScenes switchScenes = new SwitchScenes(root, ui, this);
 
-        // Plays the title screen background music.
         SoundManager.playTitleScreenMusic();
 
-        // Sets up and displays the main menu of the application.
+        // Comments in english
         switchScenes.setupMainMenu();
 
-        // Create a new Scene with dimensions and Load Css Style
+        // Comments in english
         Scene scene = new Scene(root, 1280, 720);
         primaryStage.setResizable(false);
         String css = getClass().getResource("/style.css").toExternalForm();
         scene.getStylesheets().add(css);
         primaryStage.setScene(scene);
 
-        Image icon = new Image(getClass().getResource("/art/icon_new.png").toExternalForm());
+        // Comments in english
+        Image icon = new Image(getClass().getResource("/art/interface/icon_new.png").toExternalForm());
         primaryStage.getIcons().add(icon);
         primaryStage.setTitle("Minesweeper");
         primaryStage.show();
@@ -50,12 +50,12 @@ public class Main extends Application
     {
         System.out.println("Creating board with difficulty: " + difficulty);
 
-        // Create Board, set difficulty and generate
+        // Comments in english
         Board board = new Board();
         board.setDifficulty(difficulty);
         board.generateGrid();
 
-        // Retrieves the Gridpane, Clears the current of the root pane and Adds the Pane
+        // Comments in english
         GridPane gridPane = board.getGridPane();
         root.getChildren().clear();
         root.getChildren().add(gridPane);

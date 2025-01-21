@@ -1,5 +1,6 @@
 package minesweeper;
 
+import minesweeper.Sounds.SoundManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -26,6 +27,7 @@ public class Main extends Application
         UserInterface ui = new UserInterface();
         SwitchScenes switchScenes = new SwitchScenes(root, ui, this);
 
+        SoundManager.playTitleScreenMusic();
 
         // Comments in english
         switchScenes.setupMainMenu();

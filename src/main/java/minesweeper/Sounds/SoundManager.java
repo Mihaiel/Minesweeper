@@ -9,9 +9,11 @@ import java.util.Random;
 public class SoundManager {
 
     private static final HashMap<String, MediaPlayer> soundEffects = new HashMap<>();
+    private static MediaPlayer titleScreenMusicPlayer;
 
     static {
         preloadSounds();
+        preloadMusic();
     }
 
     private static void preloadSounds() {
@@ -24,6 +26,30 @@ public class SoundManager {
         } catch (Exception e) {
             System.err.println("Error preloading sounds.");
             e.printStackTrace();
+        }
+    }
+
+    private static void preloadMusic() {
+        try {
+            Media titleMusic = new Media(SoundManager.class.getResource("/sounds/effects/music/title_screen_music.mp3").toExternalForm());
+            titleScreenMusicPlayer = new MediaPlayer(titleMusic);
+            titleScreenMusicPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Wiederholt die Musik unendlich oft
+            titleScreenMusicPlayer.setVolume(0.5); // Optionale Lautstärkeanpassung
+        } catch (Exception e) {
+            System.err.println("Error loading title screen music.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void playTitleScreenMusic() {
+        if (titleScreenMusicPlayer != null) {
+            titleScreenMusicPlayer.play(); // Musik abspielen
+        }
+    }
+
+    public static void stopTitleScreenMusic() {
+        if (titleScreenMusicPlayer != null) {
+            titleScreenMusicPlayer.stop(); // Musik stoppen
         }
     }
 

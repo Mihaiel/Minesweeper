@@ -1,5 +1,6 @@
 package minesweeper.UI;
 
+import minesweeper.Sounds.SoundManager;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -105,10 +106,25 @@ public class UserInterface {
 
         // Define actions for buttons
         backButton.setOnAction(e -> switchScenes.setupMainMenu());
-        easyButton.setOnAction(e -> switchScenes.getMain().createBoard("Easy"));
-        mediumButton.setOnAction(e -> switchScenes.getMain().createBoard("Medium"));
-        difficultButton.setOnAction(e -> switchScenes.getMain().createBoard("Difficult"));
-        halfHalfButton.setOnAction(e -> switchScenes.getMain().createBoard("50/50"));
+        easyButton.setOnAction(e -> {
+            SoundManager.stopTitleScreenMusic();  // Stoppt die Titelbildschirmmusik
+            switchScenes.getMain().createBoard("Easy");
+        });
+
+        mediumButton.setOnAction(e -> {
+            SoundManager.stopTitleScreenMusic();  // Stoppt die Titelbildschirmmusik
+            switchScenes.getMain().createBoard("Medium");
+        });
+
+        difficultButton.setOnAction(e -> {
+            SoundManager.stopTitleScreenMusic();  // Stoppt die Titelbildschirmmusik
+            switchScenes.getMain().createBoard("Difficult");
+        });
+
+        halfHalfButton.setOnAction(e -> {
+            SoundManager.stopTitleScreenMusic();  // Stoppt die Titelbildschirmmusik
+            switchScenes.getMain().createBoard("50/50");
+        });
 
         return layout;
     }

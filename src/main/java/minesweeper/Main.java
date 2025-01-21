@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import minesweeper.UI.SwitchScenes;
@@ -50,8 +51,10 @@ public class Main extends Application
 
         // Comments in english
         Board board = new Board();
+        Cell[][] cellBoard = board.getGameBoard();
         board.setDifficulty(difficulty);
         board.generateGrid();
+
 
         // Comments in english
         GridPane gridPane = board.getGridPane();

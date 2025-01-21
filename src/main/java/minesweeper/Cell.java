@@ -105,6 +105,7 @@ public class Cell extends Button
         }
     }
 
+    //nested loop to check if all cells were revealed
     public static boolean checkWin(Cell[][] board) {
         for (Cell[] row : board) {
             for (Cell cell : row) {

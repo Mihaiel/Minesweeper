@@ -88,6 +88,10 @@ public class Board {
         return this.gridPane;
     }
 
+    public Cell[][] getGameBoard() {
+        return gameBoard;
+    }
+
     /**
      * Click event handler for every cell
      * Determines what gets executed with left and right click

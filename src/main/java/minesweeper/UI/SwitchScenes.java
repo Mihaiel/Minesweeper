@@ -58,17 +58,6 @@ public class SwitchScenes
         root.getChildren().addAll(ui.createMainMenu(this));
     }
 
-    public void checkGameOutcome(Cell cell) {
-        if (!cell.isRevealed() && !cell.isFlagged()) {
-            cell.reveal();
-            if (cell.isBomb()) {
-                showLosePopUp();
-            } else if (Cell.checkWin(board)) {
-                showWinPopUp();
-            }
-        }
-    }
-
     private void showWinPopUp() {
 
         Stage winStage = new Stage();

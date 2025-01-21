@@ -12,15 +12,25 @@ public class Board {
     private Cell[][] gameBoard;
     private final GridPane gridPane;
 
+    /**
+     * new GripPane will be generated and style added from CSS class
+     */
     public Board() {
         this.gridPane = new GridPane();
-        this.gridPane.getStyleClass().add("grid-pane"); // Add CSS class for the GridPane
+        this.gridPane.getStyleClass().add("grid-pane");
     }
 
+    /**
+     * Setter for the difficulty
+     **/
     public void setDifficulty(String difficulty) {
         setDifficulty(difficulty, 0, 0);
     }
 
+    /**
+     *Setter if also custom design is used
+     *sets the difficulty levels, with the option of custom rows and columns
+     */
     public void setDifficulty(String difficulty, int customRows, int customCols) {
         this.difficulty = difficulty;
 
@@ -63,6 +73,9 @@ public class Board {
         }
     }
 
+    /**
+     * Generates the board using GenerateBoard also added click event handling
+     */
     public void generateGrid() {
         this.gridPane.getChildren().clear();
 
@@ -84,12 +97,12 @@ public class Board {
         }
     }
 
+
+    /**
+     * Constructor for the GridPane
+     */
     public GridPane getGridPane() {
         return this.gridPane;
-    }
-
-    public Cell[][] getGameBoard() {
-        return gameBoard;
     }
 
     /**

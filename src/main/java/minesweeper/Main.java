@@ -53,7 +53,6 @@ public class Main extends Application
 
         // Comments in english
         Board board = new Board();
-        Cell[][] cellBoard = board.getGameBoard();
         board.setDifficulty(difficulty);
         board.generateGrid();
 

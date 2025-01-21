@@ -4,6 +4,15 @@ import java.util.Random;
 
 public class GenerateBoard {
 
+    /**
+     * Generates a Minesweeper board with specified dimensions and bomb count.
+     *
+     * @param rows      Number of rows in the board.
+     * @param cols      Number of columns in the board.
+     * @param bombCount Number of bombs to place on the board.
+     * @return A 2D array representing the generated Minesweeper board.
+     * @throws IllegalArgumentException If the bomb count exceeds the number of cells.
+     */
     public static Cell [][] generateBoard(int rows, int cols, int bombCount) {
 
         // Total cell count
@@ -32,6 +41,14 @@ public class GenerateBoard {
 
     }
 
+    /**
+     * Places bombs randomly on the Minesweeper board.
+     *
+     * @param rows      Number of rows in the board.
+     * @param cols      Number of columns in the board.
+     * @param board     The Minesweeper board.
+     * @param bombCount Number of bombs to place.
+     */
     private static void placeBombs(int rows, int cols, Cell[][] board, int bombCount) {
         // Starting Argument
         Random rand = new Random();
@@ -50,7 +67,13 @@ public class GenerateBoard {
         }
     }
 
-    // Go through the whole board and calculate the neighbors numbers
+    /**
+     * Calculates the number of bombs surrounding each cell in the Minesweeper board.
+     *
+     * @param board The Minesweeper board.
+     * @param rows  Number of rows in the board.
+     * @param cols  Number of columns in the board.
+     */
     private static void calculateNeighbors(Cell[][] board, int rows, int cols) {
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
@@ -63,7 +86,16 @@ public class GenerateBoard {
     }
 
 
-    // Calculate each individual cells number
+    /**
+     * Counts the number of bombs surrounding a specific cell.
+     *
+     * @param board The Minesweeper board.
+     * @param x     The x-coordinate of the cell.
+     * @param y     The y-coordinate of the cell.
+     * @param rows  Number of rows in the board.
+     * @param cols  Number of columns in the board.
+     * @return The number of bombs surrounding the specified cell.
+     */
     private static int countNeighborBombs(Cell[][] board, int x, int y, int rows, int cols) {
         int count = 0;
 

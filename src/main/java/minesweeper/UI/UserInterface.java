@@ -310,7 +310,7 @@ public class UserInterface {
         ImageView tilePic = null;
         if (showImage)
         {
-            tilePic = new ImageView(Objects.requireNonNull(getClass().getResource("/art/TitlePicture.png")).toExternalForm());
+            tilePic = new ImageView(Objects.requireNonNull(getClass().getResource("/art/interface/title_picture.png")).toExternalForm());
             tilePic.setFitWidth(800);
             tilePic.setPreserveRatio(true);
         }

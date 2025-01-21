@@ -25,6 +25,7 @@ public class SwitchScenes
     private final Main main;
     private Cell[][] board;
 
+
     //Constructor for initializing SwitchScenes with required dependencies
     public SwitchScenes(StackPane root, UserInterface ui, Main main)
     {

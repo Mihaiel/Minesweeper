@@ -2,6 +2,12 @@
 
 <p>This project is a recreation of the classic Minesweeper game built as part of our university coursework <i>"Programming 1"</i> at <b>FH Campus Wien</b>. The game is developed using JavaScriptFX and features the traditional Minesweeper mechanics as well as new features such as a rewards system, unlockable content, and multiple game modes.</p>
 
+
+
+https://github.com/user-attachments/assets/63384576-7327-4c78-9a0f-c3c073c067da
+
+
+
 <h2>Features</h2>
 <ul>
     <li><strong>Classic Minesweeper Gameplay</strong>: Navigate a grid to uncover safe cells while avoiding hidden mines.</li>
